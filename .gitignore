@@ -1,0 +1,9 @@
+node_modules/
+npm-debug.log
+.env
+.cache/
+.DS_Store
+/puppeteer-screenshots/
+/puppeteer-cache/
+.vscode/
+render.yaml
