@@ -2,47 +2,38 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = async function (req, res) {
-  // 📌 فعال‌سازی CORS برای همه‌ی درخواست‌ها
+  // فعال‌سازی CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // 📌 هندل کردن preflight request (OPTIONS)
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  // هندل کردن preflight
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "GET") return res.status(405).json({ error: "روش درخواست مجاز نیست" });
+
+  const { code } = req.query;
+  if (!code || !/^\d{4,8}$/.test(code)) {
+    return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
   }
 
-  // 📌 فقط اجازه‌ی GET بده
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "روش درخواست مجاز نیست" });
-  }
+  const url = `https://membersearch.irimc.org/searchresult?MedicalSystemNo=${encodeURIComponent(code)}`;
 
   try {
-    // 📌 گرفتن کد از query و اعتبارسنجی
-    const { code } = req.query;
-    if (!code || !/^\d{4,8}$/.test(code)) {
-      return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
-    }
-
-    const url = `https://membersearch.irimc.org/searchresult?MedicalSystemNo=${encodeURIComponent(code)}`;
-    console.log("🔎 Fetching:", url);
-
-    // 📌 درخواست به سایت نظام پزشکی
     const response = await axios.get(url, {
       headers: { "User-Agent": "Mozilla/5.0" },
       timeout: 15000,
     });
 
-    if (!response.data) {
-      return res.status(502).json({ error: "پاسخ خالی از سرور مقصد" });
+    const html = response.data;
+    if (!html || typeof html !== "string") {
+      return res.status(502).json({ error: "پاسخ نامعتبر از سرور مقصد" });
     }
 
-    // 📌 پردازش HTML با cheerio
-    const $ = cheerio.load(response.data);
+    const $ = cheerio.load(html);
     const rows = $("table tbody tr");
     const results = [];
 
-    rows.each((i, row) => {
+    rows.each((_, row) => {
       const tds = $(row).find("td");
       if (tds.length >= 6) {
         results.push({
@@ -57,34 +48,19 @@ module.exports = async function (req, res) {
       }
     });
 
-    // 📌 اگر نتیجه‌ای پیدا نشد
     if (results.length === 0) {
-      console.warn("⚠️ هیچ نتیجه‌ای پیدا نشد برای کد:", code);
       return res.status(404).json({ error: "هیچ نتیجه‌ای پیدا نشد" });
     }
 
-    // 📌 اگر فقط یک نتیجه بود، خروجی رو ساده‌تر بده
-    if (results.length === 1) {
-      return res.status(200).json(results[0]);
-    }
-
-    // 📌 اگر چند نتیجه بود، همه رو بده
-    return res.status(200).json(results);
+    return res.status(200).json(results.length === 1 ? results[0] : results);
 
   } catch (err) {
-    // 📌 هندل کردن خطاهای axios
-    if (err.response) {
-      return res.status(err.response.status).json({
-        error: `خطا از سمت سایت مقصد (${err.response.status})`,
-        details: err.response.statusText,
-      });
-    }
+    const status = err.response?.status || 500;
+    const message = err.response?.statusText || err.message || "خطای ناشناخته";
 
-    // 📌 خطاهای دیگر (مثل timeout یا اتصال)
-    console.error("❌ خطا در اسکرپینگ:", err.message);
-    return res.status(500).json({
+    return res.status(status).json({
       error: "خطا در ارتباط با سایت نظام پزشکی",
-      details: err.message,
+      details: message,
     });
   }
 };
