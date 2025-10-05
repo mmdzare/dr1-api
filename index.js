@@ -1,32 +1,26 @@
 const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
+const verifyDoctor = require("./api/verify-doctor");
 
 const app = express();
+const port = process.env.PORT || 10000;
 
-// Routes
-const verifyDoctorRoute = require("./api/verify-doctor");
+app.get("/api/verify-doctor", async (req, res) => {
+  const code = req.query.code;
+  if (!code) return res.status(400).send("❌ لطفاً کد نظام پزشکی را وارد کنید");
 
-// Global Middleware
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
-
-// Health Check
-app.get("/", (req, res) => {
-  res.status(200).send("✅ dr1-api is running");
+  try {
+    const result = await verifyDoctor(code);
+    if (result) {
+      res.status(200).send(`✅ معتبره:\n${result}`);
+    } else {
+      res.status(404).send("❌ نامعتبر یا پیدا نشد");
+    }
+  } catch (err) {
+    console.error("❌ خطا در Puppeteer:", err.message);
+    res.status(500).send("❌ خطا در اعتبارسنجی");
+  }
 });
 
-// API Routes
-app.use("/api/verify-doctor", verifyDoctorRoute);
-
-// 404 Handler
-app.use((req, res) => {
-  res.status(404).json({ error: "مسیر یافت نشد" });
-});
-
-// Server Init
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ dr1-api is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`✅ dr1-api is running on port ${port}`);
 });
