@@ -1,5 +1,4 @@
-const fetch = require("node-fetch");
-const cheerio = require("cheerio");
+const puppeteer = require("puppeteer");
 
 module.exports = async (req, res) => {
   const code = req.query.code?.trim();
@@ -10,41 +9,50 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const url = `https://membersearch.irimc.org/searchresult?MedicalSystemNo=${encodeURIComponent(code)}`;
-    const response = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0" },
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
-    // بررسی وضعیت پاسخ
-    if (!response.ok) {
-      return res.status(502).json({ error: `پاسخ نامعتبر از سایت نظام پزشکی (${response.status})` });
+    const page = await browser.newPage();
+    await page.goto("https://membersearch.irimc.org/", { waitUntil: "networkidle2" });
+
+    // پر کردن فرم و ارسال
+    await page.type("#txtMedicalSystemNo", code);
+    await page.click("#btnSearch");
+
+    // صبر برای بارگذاری جدول
+    await page.waitForSelector("table tbody tr", { timeout: 5000 });
+
+    // استخراج اطلاعات از جدول
+    const result = await page.evaluate(() => {
+      const row = document.querySelector("table tbody tr");
+      if (!row) return null;
+
+      const tds = row.querySelectorAll("td");
+      if (tds.length < 6) return null;
+
+      return {
+        firstName: tds[0].innerText.trim(),
+        lastName: tds[1].innerText.trim(),
+        medicalCode: tds[2].innerText.trim(),
+        field: tds[3].innerText.trim(),
+        city: tds[4].innerText.trim(),
+        membershipType: tds[5].innerText.trim(),
+        verified: true,
+        profileUrl: "https://membersearch.irimc.org/"
+      };
+    });
+
+    await browser.close();
+
+    if (!result) {
+      return res.status(404).json({ error: `هیچ پزشک با کد ${code} یافت نشد یا اطلاعات ناقص است` });
     }
-
-    const html = await response.text();
-    const $ = cheerio.load(html);
-    const row = $("table tbody tr").first();
-    const tds = row.find("td");
-
-    // بررسی وجود داده‌ها
-    if (tds.length < 6 || !tds.eq(0).text().trim()) {
-      return res.status(404).json({ error: "پزشک یافت نشد یا اطلاعات ناقص است" });
-    }
-
-    // استخراج اطلاعات
-    const result = {
-      firstName: tds.eq(0).text().trim(),
-      lastName: tds.eq(1).text().trim(),
-      medicalCode: tds.eq(2).text().trim(),
-      field: tds.eq(3).text().trim(),
-      city: tds.eq(4).text().trim(),
-      membershipType: tds.eq(5).text().trim(),
-      profileUrl: `https://membersearch.irimc.org/?code=${code}`,
-      verified: true
-    };
 
     res.status(200).json(result);
   } catch (err) {
-    console.error("❌ خطا در اعتبارسنجی:", err.message);
+    console.error("❌ خطا در Puppeteer:", err.message);
     res.status(500).json({ error: "خطا در اعتبارسنجی پزشک یا اتصال به سایت رسمی" });
   }
 };
