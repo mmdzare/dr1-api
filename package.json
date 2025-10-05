@@ -7,6 +7,7 @@
     "postinstall": "npx puppeteer browsers install chrome",
     "preinstall": "export PUPPETEER_CACHE_DIR=/opt/render/.cache/puppeteer",
     "postinstall": "npx playwright install",
+    "postinstall": "npx playwright install",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
