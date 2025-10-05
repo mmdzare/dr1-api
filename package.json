@@ -1,15 +1,24 @@
 {
   "name": "dr1-api",
   "version": "1.0.0",
+  "description": "API برای اعتبارسنجی پزشکان با ساختار تمیز و قابل دیپلوی",
+  "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "morgan": "^1.10.0"
   },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "keywords": ["api", "express", "medical", "verify", "dr1"],
+  "author": "Mohamad",
+  "license": "MIT"
 }
