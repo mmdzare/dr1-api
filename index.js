@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.send("API is running");
+  res.send("✅ dr1-api is running");
 });
 
 app.get("/api/verify-doctor", verifyDoctor);
