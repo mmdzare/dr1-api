@@ -1,19 +1,18 @@
-const { chromium } = require("playwright");
+const axios = require("axios");
 
 module.exports = async function verifyDoctor(code) {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto("https://membersearch.irimc.org", { waitUntil: "domcontentloaded" });
+  try {
+    const res = await axios.get("https://membersearch.irimc.org", {
+      params: { code },
+      headers: { "User-Agent": "Mozilla/5.0" }
+    });
 
-  await page.fill("#txtCode", code);
-  await page.click("#btnSearch");
-  await page.waitForSelector("#resultTable", { timeout: 10000 });
+    if (res.data.includes("نتیجه‌ای یافت نشد")) {
+      return null;
+    }
 
-  const result = await page.evaluate(() => {
-    const table = document.querySelector("#resultTable");
-    return table ? table.innerText : null;
-  });
-
-  await browser.close();
-  return result;
+    return "✅ معتبره یا پاسخ دریافت شد";
+  } catch (err) {
+    throw new Error("❌ خطا در اتصال یا دریافت داده");
+  }
 };
