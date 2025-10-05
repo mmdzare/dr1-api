@@ -1,72 +1,36 @@
-const express = require("express");
 const puppeteer = require("puppeteer");
-const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const code = req.query.code?.trim();
+async function verifyDoctor(code) {
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
 
-  const isValidCode = /^\d{4,8}$/.test(code);
-  if (!code || !isValidCode) {
-    return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
+  const page = await browser.newPage();
+  await page.goto("https://membersearch.irimc.org", { waitUntil: "domcontentloaded" });
+
+  await page.type("#txtCode", code);
+  await page.click("#btnSearch");
+  await page.waitForSelector("#resultTable", { timeout: 10000 });
+
+  const result = await page.evaluate(() => {
+    const table = document.querySelector("#resultTable");
+    return table ? table.innerText : null;
+  });
+
+  if (result) {
+    console.log(`✅ معتبره | کد: ${code}\n${result}`);
+  } else {
+    console.log(`❌ نامعتبر یا پیدا نشد | کد: ${code}`);
   }
 
-  let browser;
+  await browser.close();
+}
 
-  try {
-      headless: "new",
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+const code = process.argv[2];
+if (!code) {
+  console.error("❌ لطفاً کد نظام پزشکی را وارد کنید");
+  process.exit(1);
+}
 
-    const page = await browser.newPage();
-    await page.goto("https://membersearch.irimc.org/", {
-      waitUntil: "networkidle2",
-      timeout: 15000
-    });
-
-    await page.type("#txtMedicalSystemNo", code);
-    await page.click("#btnSearch");
-    await page.waitForSelector("table tbody tr", { timeout: 5000 });
-
-    const result = await page.evaluate(() => {
-      const row = document.querySelector("table tbody tr");
-      if (!row) return null;
-
-      const tds = row.querySelectorAll("td");
-      if (tds.length < 6) return null;
-
-      return {
-        firstName: tds[0].innerText.trim(),
-        lastName: tds[1].innerText.trim(),
-        medicalCode: tds[2].innerText.trim(),
-        field: tds[3].innerText.trim(),
-        city: tds[4].innerText.trim(),
-        membershipType: tds[5].innerText.trim(),
-        verified: true,
-        profileUrl: "https://membersearch.irimc.org/"
-      };
-    });
-
-    if (!result) {
-      return res.status(404).json({
-        error: `هیچ پزشک با کد ${code} یافت نشد یا اطلاعات ناقص است`
-      });
-    }
-
-    return res.status(200).json(result);
-  } catch (err) {
-    console.error("❌ خطا در Puppeteer:", err);
-    return res.status(500).json({
-      error: "خطا در اعتبارسنجی پزشک یا اتصال به سایت رسمی"
-    });
-  } finally {
-    if (browser) {
-      try {
-        await browser.close();
-      } catch (closeErr) {
-        console.warn("⚠️ خطا در بستن مرورگر:", closeErr);
-      }
-    }
-  }
-});
-
-module.exports = router;
+verifyDoctor(code);
