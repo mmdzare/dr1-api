@@ -3,7 +3,6 @@ const puppeteer = require("puppeteer");
 module.exports = async (req, res) => {
   const code = req.query.code?.trim();
 
-  // اعتبارسنجی ورودی
   if (!code || !/^\d{4,8}$/.test(code)) {
     return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
   }
@@ -17,14 +16,11 @@ module.exports = async (req, res) => {
     const page = await browser.newPage();
     await page.goto("https://membersearch.irimc.org/", { waitUntil: "networkidle2" });
 
-    // پر کردن فرم و ارسال
     await page.type("#txtMedicalSystemNo", code);
     await page.click("#btnSearch");
 
-    // صبر برای بارگذاری جدول
     await page.waitForSelector("table tbody tr", { timeout: 5000 });
 
-    // استخراج اطلاعات از جدول
     const result = await page.evaluate(() => {
       const row = document.querySelector("table tbody tr");
       if (!row) return null;
