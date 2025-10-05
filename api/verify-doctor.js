@@ -1,14 +1,10 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-module.exports = async function verifyDoctor(req, res) {
-  // فقط اجازه‌ی GET و OPTIONS
+module.exports = async function (req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "GET") {
-    return res.status(405).json({ error: "روش درخواست مجاز نیست" });
-  }
+  if (req.method !== "GET") return res.status(405).json({ error: "روش درخواست مجاز نیست" });
 
-  // اعتبارسنجی ورودی
   const { code } = req.query;
   if (!code || !/^\d{4,8}$/.test(code)) {
     return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
@@ -22,12 +18,7 @@ module.exports = async function verifyDoctor(req, res) {
       timeout: 15000,
     });
 
-    const html = response.data;
-    if (!html || typeof html !== "string") {
-      return res.status(502).json({ error: "پاسخ نامعتبر از سرور مقصد" });
-    }
-
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(response.data);
     const rows = $("table tbody tr");
     const results = [];
 
@@ -53,12 +44,9 @@ module.exports = async function verifyDoctor(req, res) {
     return res.status(200).json(results.length === 1 ? results[0] : results);
 
   } catch (err) {
-    const status = err.response?.status || 500;
-    const message = err.response?.statusText || err.message || "خطای ناشناخته";
-
-    return res.status(status).json({
+    return res.status(500).json({
       error: "خطا در ارتباط با سایت نظام پزشکی",
-      details: message,
+      details: err.message,
     });
   }
 };
