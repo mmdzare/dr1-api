@@ -1,4 +1,4 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 const cheerio = require("cheerio");
 
 module.exports = async function (req, res) {
@@ -13,12 +13,13 @@ module.exports = async function (req, res) {
   const url = `https://membersearch.irimc.org/searchresult?MedicalSystemNo=${encodeURIComponent(code)}`;
 
   try {
-    const response = await axios.get(url, {
+    const response = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0" },
       timeout: 15000,
     });
 
-    const $ = cheerio.load(response.data);
+    const html = await response.text();
+    const $ = cheerio.load(html);
     const rows = $("table tbody tr");
     const results = [];
 
