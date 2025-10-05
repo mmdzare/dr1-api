@@ -1,9 +1,10 @@
+const express = require("express");
 const puppeteer = require("puppeteer");
+const router = express.Router();
 
-module.exports = async (req, res) => {
+router.get("/", async (req, res) => {
   const code = req.query.code?.trim();
 
-  // اعتبارسنجی ورودی
   const isValidCode = /^\d{4,8}$/.test(code);
   if (!code || !isValidCode) {
     return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
@@ -12,28 +13,21 @@ module.exports = async (req, res) => {
   let browser;
 
   try {
-    // راه‌اندازی مرورگر
     browser = await puppeteer.launch({
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
     const page = await browser.newPage();
-
-    // رفتن به صفحه جستجو
     await page.goto("https://membersearch.irimc.org/", {
       waitUntil: "networkidle2",
       timeout: 15000
     });
 
-    // وارد کردن کد و کلیک روی جستجو
     await page.type("#txtMedicalSystemNo", code);
     await page.click("#btnSearch");
-
-    // انتظار برای بارگذاری نتایج
     await page.waitForSelector("table tbody tr", { timeout: 5000 });
 
-    // استخراج اطلاعات پزشک
     const result = await page.evaluate(() => {
       const row = document.querySelector("table tbody tr");
       if (!row) return null;
@@ -74,4 +68,6 @@ module.exports = async (req, res) => {
       }
     }
   }
-};
+});
+
+module.exports = router;
