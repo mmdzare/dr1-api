@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: dr1-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    nodeVersion: 18.18.2
+    autoDeploy: true
