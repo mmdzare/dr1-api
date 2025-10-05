@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const verifyDoctor = require("./api/verify-doctor"); // مسیر دقیق به فایل اسکرپ
+const verifyDoctor = require("./api/verify-doctor");
 
 const app = express();
 app.use(cors());
