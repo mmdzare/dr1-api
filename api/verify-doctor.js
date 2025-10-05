@@ -4,29 +4,36 @@ module.exports = async (req, res) => {
   const code = req.query.code?.trim();
 
   // اعتبارسنجی ورودی
-  if (!code || !/^\d{4,8}$/.test(code)) {
+  const isValidCode = /^\d{4,8}$/.test(code);
+  if (!code || !isValidCode) {
     return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
   }
 
   let browser;
 
   try {
+    // راه‌اندازی مرورگر
     browser = await puppeteer.launch({
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
     const page = await browser.newPage();
+
+    // رفتن به صفحه جستجو
     await page.goto("https://membersearch.irimc.org/", {
       waitUntil: "networkidle2",
       timeout: 15000
     });
 
+    // وارد کردن کد و کلیک روی جستجو
     await page.type("#txtMedicalSystemNo", code);
     await page.click("#btnSearch");
 
+    // انتظار برای بارگذاری نتایج
     await page.waitForSelector("table tbody tr", { timeout: 5000 });
 
+    // استخراج اطلاعات پزشک
     const result = await page.evaluate(() => {
       const row = document.querySelector("table tbody tr");
       if (!row) return null;
@@ -52,13 +59,19 @@ module.exports = async (req, res) => {
       });
     }
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (err) {
-    console.error("❌ خطا در Puppeteer:", err.message);
-    res.status(500).json({
+    console.error("❌ خطا در Puppeteer:", err);
+    return res.status(500).json({
       error: "خطا در اعتبارسنجی پزشک یا اتصال به سایت رسمی"
     });
   } finally {
-    if (browser) await browser.close();
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (closeErr) {
+        console.warn("⚠️ خطا در بستن مرورگر:", closeErr);
+      }
+    }
   }
 };
