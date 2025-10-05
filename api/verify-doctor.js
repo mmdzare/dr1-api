@@ -2,8 +2,8 @@ const puppeteer = require("puppeteer");
 
 module.exports = async function verifyDoctor(code) {
   const browser = await puppeteer.launch({
-    executablePath: "/opt/render/.cache/puppeteer/chrome/linux-141.0.7390.54/chrome-linux64/chrome",
     headless: "new",
+    executablePath: "/opt/render/.cache/puppeteer/chrome/linux-141.0.7390.54/chrome-linux64/chrome",
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
 
