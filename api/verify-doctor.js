@@ -1,16 +1,14 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-module.exports = async function (req, res) {
-  // فعال‌سازی CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  // هندل کردن preflight
+module.exports = async function verifyDoctor(req, res) {
+  // فقط اجازه‌ی GET و OPTIONS
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "GET") return res.status(405).json({ error: "روش درخواست مجاز نیست" });
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "روش درخواست مجاز نیست" });
+  }
 
+  // اعتبارسنجی ورودی
   const { code } = req.query;
   if (!code || !/^\d{4,8}$/.test(code)) {
     return res.status(400).json({ error: "کد نظام پزشکی نامعتبر است" });
