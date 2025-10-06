@@ -1,12 +1,23 @@
+// 📌 وارد کردن ماژول‌ها
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 📌 فعال‌سازی CORS
+app.use(cors({
+  origin: "*", // می‌تونی محدود کنی به "https://mmdzare.github.io"
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
+
+// 📌 فعال‌سازی JSON
 app.use(express.json());
 
+// 📌 روت اصلی برای اعتبارسنجی پزشک
 app.post('/api/verify-doctor', async (req, res) => {
   const { code } = req.body;
   if (!code) return res.status(400).json({ error: 'Medical code is required' });
@@ -37,11 +48,10 @@ app.post('/api/verify-doctor', async (req, res) => {
       }
     );
 
-    // مرحله ۳: پارس کردن جدول نتایج به صورت داینامیک
+    // مرحله ۳: پارس کردن جدول نتایج
     const $$ = cheerio.load(searchRes.data);
     const headers = [];
 
-    // گرفتن عنوان ستون‌ها
     $$('table.table-striped thead th').each((i, th) => {
       headers.push($$(th).text().trim());
     });
@@ -74,6 +84,7 @@ app.post('/api/verify-doctor', async (req, res) => {
   }
 });
 
+// 📌 ران کردن سرور
 app.listen(PORT, () => {
   console.log(`✅ dr1-api is running on port ${PORT}`);
 });
