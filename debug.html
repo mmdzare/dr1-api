@@ -1,0 +1,695 @@
+<!DOCTYPE html><html class="no-js chrome" lang="en"><head><meta http-equiv="origin-trial" content="A7vZI3v+Gz7JfuRolKNM4Aff6zaGuT7X0mf3wtoZTnKv6497cVMnhy03KDqX7kBz/q/iidW7srW31oQbBt4VhgoAAACUeyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGUuY29tOjQ0MyIsImZlYXR1cmUiOiJEaXNhYmxlVGhpcmRQYXJ0eVN0b3JhZ2VQYXJ0aXRpb25pbmczIiwiZXhwaXJ5IjoxNzU3OTgwODAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+
+    <title>سازمان نظام پزشکی | سامانه جستجوی اعضای جامعه پزشکی</title>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="جستجو و دریافت اطلاعات پزشکان، دندان‌پزشکان، داروسازان، کارشناسان علوم آزمایشگاهی، فیزیوتراپی، مامایی، بینایی‌سنجی، شنوایی‌سنجی، گفتاردرمانی، کاردرمانی، کاریوپراتیک، تغذیه، ارتز و پروتز، ثبت‌شده در پایگاه داده سازمان نظام پزشکی کشور">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="icon" href="https://cdn.irimc.org/v3.0/images/favicon.jpg" type="image/x-icon"> <!-- Favicon-->
+    <!-- Favicon-->
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css">
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/plugins/morrisjs/morris.min.css">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/site/css/main.css">
+    
+
+
+
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/site/css/rtl.css">
+    <link rel="stylesheet" href="https://cdn.irimc.org/v3.0/site/css/color_skins.css">
+    
+    <!-- Sweet Alert Css -->
+    <link href="https://cdn.irimc.org/v2.1/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+
+    <link href="https://cdn.irimc.org/v3.0/plugins/font-awesome/css/all.css" rel="stylesheet">
+    
+
+
+    <link href="https://cdn.irimc.org/v3.0/site/css/site.css" rel="stylesheet">
+    <link href="/Content/custom-css/common.css" rel="stylesheet">
+
+    <link href="https://cdn.irimc.org/v3.0/site/css/fontiran.css" rel="preload" as="font">
+    <link href="https://cdn.irimc.org/v3.0/plugins/font-awesome/webfonts/fa-solid-900.woff2" rel="preload" as="font">
+    <link href="https://cdn.irimc.org/v3.0/plugins/font-awesome/webfonts/fa-solid-900.woff2" rel="preload" as="font">
+    <link href="https://cdn.irimc.org/v3.0/site/fonts/simple-Line-Icons.woff" rel="preload" as="font">
+    <link href="https://cdn.irimc.org/v3.0/plugins/font-awesome/webfonts/fa-brands-400.woff2" rel="preload" as="font">
+    
+    <link href="https://cdn.irimc.org/v3.0/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet">
+    <link href="/Content/Plugins/ajax-bootstrap-select/css/ajax-bootstrap-select.css" rel="stylesheet">
+    <link href="/Content/custom-css/Index.css" rel="stylesheet">
+    <style>
+    </style>
+
+
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;box-sizing: content-box;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+<body class="theme-green rtl">
+
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper" style="display: none;">
+        <div class="loader">
+            <img src="https://cdn.irimc.org/v3.0/images/irimc/simurgh-final-transparent.gif">
+
+            <p>در حال بارگذاری...</p>
+        </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    
+<div class="topDiv">
+    <nav class="top_navbar">
+        <div class="container noPaddingLR">
+            <div class="col-md-12">
+                <div class="navbar-logo">
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand showInSmallSize" href="https://irimc.org">
+                        <span class="navbar-title-mobile">سازمان نظام پزشکی کشور</span>
+
+                        <img src="https://cdn.irimc.org/v3.0/images/irimc/logo-white200b.png">
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <aside id="leftsidebar" class="sidebar h_menu">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-12">
+                    <div class="menu">
+                        <div class="navbar-logo side showInLargSize">
+                            <a class="navbar-brand" href="https://irimc.org">
+                                <img class="hide-on-scroll" src="https://cdn.irimc.org/v3.0/images/irimc/logo-MedicalCouncil-white.png">
+                                <img class="show-on-scroll" src="https://cdn.irimc.org/v3.0/images/irimc/logo-white200b.png">
+                            </a>
+                        </div>
+                        <ul class="list">
+                            <li>
+                                <a href="https://irimc.org/" class=" waves-effect waves-block"><i class="icon-home"></i><span>سازمان نظام پزشکی</span></a>
+                            </li>
+                            <li>
+                                <a href="/" class=" waves-effect waves-block"><i class="icon-magnifier"></i><span>جستجوی اعضاء</span></a>
+                            </li>
+                            <li>
+                                <a href="/directory" class=" waves-effect waves-block"><i class="icon-user"></i><span>فهرست اعضاء</span></a>
+                            </li>
+                            
+                            <li><a class=" waves-effect waves-block"></a></li>
+                            <li><a class=" waves-effect waves-block"></a></li>
+                            <li><a class=" waves-effect waves-block"></a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+
+
+
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container">
+        </div>
+    </section>
+    <section class="content">
+
+        <div class="container col-12 col-sm-12 col-md-12 col-lg-10  col-xl-10 ">
+
+            
+
+<div class="row clearfix rowWithoutMargin">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="body block-header">
+                <div class="row">
+                    <div class=" col-sm-12">
+                        <div class=" col-sm-12">
+                            <h1 style="padding-top: 15px;">سامانه جستجوی اعضاء نظام پزشکی</h1>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix rowWithoutMargin">
+    <div class="col-xl-6 col-lg-6 col-12 row rowWithoutMargin">
+        <div class="col-lg-1 col-md-1"></div>
+        <div class="col-lg-11 col-md-10">
+            <div class="company_detail">
+                <p>برای جستجو و مشاهده اطلاعات حرفه‌ای اعضا جامعه پزشکی (پزشکان، دندان‌پزشکان، داروسازان، مامایی، علوم آزمایشگاهی، تغذیه و...) می‌توانید از این فرم استفاده نمایید.</p>
+                <strong> نکات:</strong>
+                <ul>
+                    
+                    <li>در فیلدهای "رشته تخصصی" و "شهر"، می توانید یکی از موارد پیشنهادی را انتخاب نمایید.</li>
+                    <li>در فیلد آدرس، صرفاً کافی است بخشی از آدرس موردنظر را وارد نمایید.</li>
+                    <li>حداکثر 100 نتیجه در هر جستجو قابل دریافت است. با افزایش جزییات جستجو، نتایج دقیق‌تر قابل دریافت است.</li>
+                    <li>شما حداکثر می توانید 10 جستجو در هر 10 دقیقه انجام دهید.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 row rowWithoutMargin">
+        <div class="col-lg-12 col-md-1 col-sm-12"></div>
+        <div class="col-lg-11 col-md-10 col-sm-12">
+            <div class="card">
+                <div class="header l-mjp">
+                    <h5 style="margin-bottom: 0px"> جستجو اعضاء نظام پزشکی</h5>
+                    
+                </div>
+<form action="/searchresult" class="submit-by-enter" id="frmSearch" method="post"><input name="__RequestVerificationToken" type="hidden" value="MfkURzI9WKPkGASbJuXtruJTi-RxRbXUoCU1nCyxOUk_IaToihvRVOUftolkgj8FcuG2kUcIgH6WGLFI485luiJxmsSkaVxRHn7BgqpDFK01" style="">            <div class="body">
+
+                <div class="row clearfix">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <input class="form-control mustFill" data-length="2" id="FirstName" name="FirstName" placeholder="نام" type="text" value="" style="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group">
+                            <input class="form-control mustFill" data-length="2" id="LastName" name="LastName" placeholder="نام خانوادگی" type="text" value="" style="">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-12 col-lg-6 col-lg-push-6">
+                        <div class="form-group row" style="padding-top: 10px; text-align: center;">
+                            <div class="radio col-4 ">
+                                <input type="radio" name="Gender" id="GenderX" value="" checked="" style="">
+                                <label for="GenderX">
+                                    همه
+                                </label>
+                            </div>
+                            <div class="radio col-4">
+                                <input type="radio" name="Gender" id="GenderF" value="F" style="">
+                                <label for="GenderF">
+                                    خانم
+                                </label>
+                            </div>
+                            <div class="radio col-4">
+                                <input type="radio" name="Gender" id="GenderM" value="M" style="">
+                                <label for="GenderM">
+                                    آقا
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-lg-pull-6">
+                        <div class="form-group ">
+                            <input class="form-control digit-only onblur-keep-digit-only mustFill" id="McCode" name="McCode" placeholder="شماره نظام پزشکی" type="text" value="" style="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-times" id="DegreeField_clear" style="display: none"></i>
+                                <div class="spinner-border spinner-border-sm text-info show-on-type" data-field="DegreeField_text" style="display: none"></div>
+                            </span>
+
+                            
+                            <input autocomplete="off" class="form-control degreeFieldAutoSelect mustFill" data-url="/EduDegreesFieldsAutocomplete" id="DegreeField" name="DegreeField" placeholder="رشته" type="text" value="" style="">
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+
+
+                    <div class="col-12 col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-times" id="OfficeCity_clear" style="display: none"></i>
+                                <div class="spinner-border spinner-border-sm text-info show-on-type" data-field="OfficeCity_text" style="display: none"></div>
+
+                            </span>
+                            
+                            <input autocomplete="off" class="form-control cityAutoSelect mustFill" data-url="/CitiesAutocomplete" id="OfficeCity" name="OfficeCity" placeholder="شهر" type="text" value="" style="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-group  ">
+                            <input class="form-control mustFill" data-length="4" id="OfficeAddress" name="OfficeAddress" placeholder="خیابان، محله،..." type="text" value="" style="">
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6Ld2t-cUAAAAAH0dDULFp6M4PxAA6X9qWkBhCBoe" data-callback="recaptchaCallback" data-size="invisible"><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; position: fixed; visibility: hidden; display: block; transition: right 0.3s; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" width="256" height="60" role="presentation" name="a-k30f8sizp0vj" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Ld2t-cUAAAAAH0dDULFp6M4PxAA6X9qWkBhCBoe&amp;co=aHR0cHM6Ly9tZW1iZXJzZWFyY2guaXJpbWMub3JnOjQ0Mw..&amp;hl=fa&amp;v=Jv8jlA-BQE5JD6rA-h_iqNH2&amp;size=invisible&amp;anchor-ms=20000&amp;execute-ms=15000&amp;cb=k9x0xz794rl7"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div>
+
+                    </div>
+
+
+                <div class="footer">
+                    <button type="button" id="btnSearch" class="submit-button btn btn-mjp btn-round btn-block">جستجو</button>
+                </div>
+            </div>
+</form>            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-12"></div>
+    </div>
+</div>
+
+        </div>
+        <br>
+        <br> <br>
+        <br>
+    </section>
+
+    <footer class="infinio-footer">
+        <div class="footer ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="footer-content">
+                            <div class="title-footer">
+                                <h6>سامانه جستجوی اعضای سازمان نظام پزشکی کشور، نسخه 2.0</h6>
+                            </div>
+                            <p style="text-align: justify">
+                                این سامانه با هدف تسهیل در یافتن اعضای جامعه پزشکی، دسترسی به اطلاعات حرفه‌ای آنان و اطمینان خاطر از دارا بودن مجوزهای لازم برای ارائه خدمات حرفه‌ای (مانند پروانه طبابت و...) و در راستای اجرای قانون انتشار و دسترسی آزاد به اطلاعات مصوب جلسه علنی مورخ 6/ 11/ ۱۳87 مجلس شورای اسلامی و آیین‌نامه اجرایی قانون انتشار و دسترسی آزاد به اطلاعات مصوب ۲۱/ ۸/ ۱۳۹۳ هیئت‌وزیران و رسالت سازمان مبنی بر انتشار اطلاعات دربردارنده حقوق و تکالیف مردم از طریق رسانه‌های همگانی ارائه شده است.
+                            </p>
+                            <p style="text-align: justify">
+                                اطلاعات ارائه‌شده در پروفایل اعضای سازمان نظام پزشکی، شامل اطلاعات بروز اعضاء در بخش صلاحیت‌های حرفه‌ای بوده و در خصوص اطلاعات تماسی ارائه‌شده، آخرین اطلاعات اعلامی از سوی عضو را شامل می‌شود. لذا در صورت تغییر اطلاعات، اعضاء می‌توانند از طریق درگاه پزشک نسبت به به‌روزآوری اطلاعات خود اقدام نمایند.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-5 row">
+                        <div class="col-12 col-sm-6">
+                            <div class="footer-content">
+                                <div class="title-footer">
+                                    <h6>خدمات ویژه اعضاء</h6>
+                                </div>
+
+                                <ul>
+                                    <li><a href="http://irimc.darmoon.net/" target="_blank">بیمه خدمات درمان تکمیلی ایران</a></li>
+                                    <li><a href="http://irimc.org/واحد-وام">واحد وام</a></li>
+                                    <li><a href="https://www.iranjob.ir/ebnesina">کاریابی ابن سینا</a></li>
+                                    <li><a href="http://www.irimcs.ir/">صندوق تعاون و رفاه</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+
+                            <div class="footer-content">
+                                <div class="title-footer">
+                                    <h6>پیوندهای مفید</h6>
+                                </div>
+
+                                <ul>
+                                    <li><a href="http://research.ac.ir/" target="_blank">پرتال اطلاعات پژوهشی پزشکی کشور</a></li>
+                                    <li><a href="http://www.behdasht.gov.ir/" target="_blank">وزارت بهداشت درمان و آموزش پزشکی</a></li>
+                                    <li><a href="http://www.lmo.ir/" target="_blank">سازمان پزشکی قانونی</a></li>
+                                    <li><a href="https://www.msrt.ir/fa" target="_blank">وزارت علوم تحقیقات و فناوری</a></li>
+                                    <li><a href="http://irimc.org/Portals/0/PDF/ScientificMap.pdf" target="_blank">نقشه جامع علمی کشور</a></li>
+                                    <li><a href="http://irimc.org/Portals/0/PDF/HealthMap1394.pdf" target="_blank">نقشه سلامت جمهوری اسلامی ایران</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 ">
+                        <div class="footer-content">
+                            <div class="title-footer">
+                                <h6>اطلاعات تماس</h6>
+                            </div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fa fa-map-marked"></i></td>
+                                        <td class="conains-text">
+                                            <span>خیابان کارگر شمالی، بالاتر از جلال آل احمد، خیابان فرشی مقدم (شانزدهم)، شماره 119، سازمان نظام پزشکی کل کشور</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-phone"></i></td>
+                                        <td class="conains-text">
+                                            <span>84130 – 021</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-fax"></i></td>
+                                        <td class="conains-text">
+                                            <span>88331083</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-envelope"></i></td>
+                                        <td class="conains-text">
+                                            <span>info@irimc.org</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="social-footer">
+                                <ul>
+                                    <li><a href="https://t.me/IRIMCCHANNEL" target="_blank"><i class="fab fa-telegram"></i></a></li>
+                                    <li><a href="https://wa.me/9809128349476" target="_blank" title="صرفا متن"><i class="fab fa-whatsapp"></i></a></li>
+                                    <li><a href="https://www.instagram.com/irimc.ir/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://twitter.com/irimci" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="col-12">
+                                <small class="text-white">© کلیه حقوق برای <a href="https://irimc.org">سازمان نظام پزشکی کشور</a> محفوظ است</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- Jquery Core Js -->
+    <script type="text/javascript" async="" charset="utf-8" src="https://www.gstatic.com/recaptcha/releases/Jv8jlA-BQE5JD6rA-h_iqNH2/recaptcha__fa.js" crossorigin="anonymous" integrity="sha384-xrExLzZ429mPJbrmULjPBRIwjQETCPAF20CZkqYewDlg43DPqEBSnFIRwCERIDV3"></script><script src="https://cdn.irimc.org/v3.0/site/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="https://cdn.irimc.org/v3.0/site/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+    <script src="https://cdn.irimc.org/v3.0/site/bundles/morrisscripts.bundle.js"></script><!-- Morris Plugin Js -->
+    <script src="https://cdn.irimc.org/v3.0/site/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
+    <script src="https://cdn.irimc.org/v3.0/site/bundles/knob.bundle.js"></script> <!-- Jquery Knob-->
+
+    <script src="https://cdn.irimc.org/v3.0/site/bundles/mainscripts.bundle.js"></script>
+    <script src="https://cdn.irimc.org/v3.0/site/js/pages/widgets/infobox/infobox-1.js"></script>
+    <script src="https://cdn.irimc.org/v3.0/site/js/pages/index.js"></script>
+    
+    <script src="https://cdn.irimc.org/v2.1/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- SweetAlert Plugin Js -->
+    <script src="https://www.google.com/recaptcha/api.js?hl=fa"></script>
+    
+    <script src="/Content/custom-js/GlobalScripts.js"></script>
+
+    
+    <script src="https://cdn.irimc.org/v3.0/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="/Content/Plugins/ajax-bootstrap-select/js/ajax-bootstrap-select.js"></script>
+    <script src="https://cdn.irimc.org/v3.0/plugins/jquery-validation/jquery.validate.js"></script> <!-- Jquery Validation Plugin Css -->
+    <script src="/Content/Plugins/popper/popper.js"></script>
+    <script src="/Content/Plugins/bootstrap-autocomplete/bootstrap-autocomplete.js"></script>
+        <script>
+            function recaptchaCallback() {
+                $('textarea[name=g-recaptcha-response]').attr('name', 'g_recaptcha_response');
+                $('#frmSearch').submit();
+            }
+
+            $(document).ready(function() {
+                var useCaptcha = false;
+
+                $('#btnSearch').on("click",
+                    function() {
+                        if (validation()) {
+                            if (useCaptcha) {
+                                grecaptcha.execute();
+                            } else {
+                                $('#frmSearch').submit();
+                            }
+                        }
+                    });
+
+            });
+        </script>
+    <script>
+        
+        var urlcityAjax =
+            "/citiesautocomplete";
+
+        $('.cityAutoSelect').autoComplete(
+            {
+                noResultsText: 'نتیجه‌ای یافت نشد'
+            });
+        $('.degreeFieldAutoSelect').autoComplete({
+            noResultsText: 'نتیجه‌ای یافت نشد'
+        });
+
+        var urldegreeFieldAjax =
+            "/edudegreesfieldsautocomplete";
+
+        function GetOption(url) {
+            var options = {
+                ajax: {
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        text: '{{{q}}}'
+                    }
+                },
+                locale: {
+                    emptyTitle: 'جستجو...'
+                },
+                log: 3,
+                size: '8',
+                preprocessData: function(data) {
+                    var i, l = data.length, array = [];
+                    if (l) {
+                        for (i = 0; i < l; i++) {
+                            array.push($.extend(true,
+                                data[i],
+                                {
+                                    text: data[i].Text,
+                                    value: data[i].Value
+                                }));
+                        }
+                    }
+
+                    return array;
+                }
+            };
+            return options;
+        }
+
+
+        $(document).ready(function() {
+
+            $('input.form-control').on("blur",
+                function() {
+                    if ($(this).parent().hasClass('bs-searchbox')) {
+                        return;
+                    }
+                    var $element = $(this);
+                    var hasSuccessVal = hasSuccessValue(this);
+                    if (!hasSuccessVal) {
+                        var placeHolder = $(this).attr('placeholder');
+                        var minLength = $(this).data("length");
+                        $element.closest('.form-group').removeClass('has-success');
+                        $element.closest('.form-group').addClass('has-danger');
+                        $(this).val("");
+                        GenerateSingleMessage("خطا", "برای " + placeHolder + " باید حداقل " + minLength + " حرف وارد کنید.", "danger", 5000);
+                        return false;
+                    }
+                    var hasVal = hasValue(this);
+                    if (hasVal) {
+                        $element.closest('.form-group').addClass('has-success');
+                        $element.closest('.input-group').addClass('has-success');
+                        $element.closest('.form-group').removeClass('has-danger');
+                    } else {
+                        $element.closest('.input-group').removeClass('has-success');
+                        $element.closest('.form-group').removeClass('has-success');
+                        $element.closest('.form-group').removeClass('has-danger');
+
+
+                    }
+                });
+            $('select.form-control').on("change",
+                function() {
+                    var $element = $(this);
+                    var hasVal = hasValue(this);
+                    if (hasVal) {
+                        $element.closest('.btn-group').addClass('has-success');
+                    } else {
+                        $element.closest('.btn-group').removeClass('has-success');
+                    }
+                });
+            InitialAutoComplete("OfficeCity", ".cityAutoSelect", "OfficeCity_text", "#OfficeCity_clear");
+            InitialAutoComplete("DegreeField", ".degreeFieldAutoSelect", "DegreeField_text", "#DegreeField_clear");
+        });
+
+        function validation() {
+            var count = 0;
+            $(".mustFill").each(function(i) {
+                var hasVal = hasValue(this) && hasSuccessValue(this);
+                if (hasVal) {
+                    count++;
+                }
+            });
+            if (count < 1) {
+                GenerateSingleMessage("خطا", "لطفاً حداقل یک مورد را صحیح وارد کنید.", "danger", 5000);
+                hideWaiting();
+                return false;
+            }
+            //if (!$('textarea[name=g-recaptcha-response]').val()) {
+            //    GenerateSingleMessage("بارگذاری مجدد", "لطفاً مجدداً صفحه را بارگذاری کنید.", "danger", 5000);
+            //    hideWaiting();
+            //    setTimeout(function() {
+            //            location.reload();
+            //        },
+            //        3000);
+            //    return false;
+            //}
+
+            return true;
+        }
+
+        function hasValue(elem) {
+            return $(elem).val().length > 0;
+        }
+
+        function hasSuccessValue(elem) {
+            return true;
+            var successLength = $(elem).data("length");
+            if (successLength) {
+                var hasminLength = $(elem).val().length >= successLength;
+                if (hasminLength) {
+                    return true;
+                } else if ($(elem).val().length == 0) {
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+
+        function InitialAutoComplete(name, selectorClass, inputName, iconId) {
+            $(document).ready(function() {
+                if (hasValue($('input[name=' + name + ']'))) {
+                    $(iconId).show();
+                }
+            });
+            $(iconId).on("click",
+                function() {
+                    $('input[name="' + name + '"]').val("");
+                    $('input[name="' + name + '"]').addClass("mustFill");
+                    $('input[name="' + inputName + '"]').val("");
+                    $('.dropdown-item').removeClass('active');
+                    $(this).hide();
+                });
+            $(selectorClass).on('autocomplete.select',
+                function(evt, item) {
+                    if (hasValue($('input[name=' + name + ']'))) {
+                        $(iconId).show();
+                        $('.show-on-type[data-field="' + inputName + '"]').hide();
+                        return;
+                    }
+                });
+            $('input[name="' + name + '"]').on("keyup",
+                function() {
+                    $(iconId).hide();
+                    if (hasValue($('input[name=' + name + ']'))) {
+                        $('.show-on-type[data-field="' + inputName + '"]').show();
+                    } else {
+                        $('.show-on-type[data-field="' + inputName + '"]').hide();
+
+                    }
+                });
+            $('input[name="' + name + '"]').on("blur",
+                function() {
+                    $('.show-on-type[data-field="' + inputName + '"]').hide();
+                    if (!hasValue($('input[name=' + name + ']'))) {
+                        $('input[name="' + name + '"]').val("");
+                        $('input[name="' + name + '"]').addClass("mustFill");
+                        $('input[name="' + inputName + '"]').val("");
+                        $('.dropdown-item').removeClass('active');
+                        $(iconId).hide();
+
+                    } else {
+                        $(iconId).show();
+                    }
+                });
+        }
+
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        GenerateMessages();
+    });
+    $(window).on("scroll",
+        function() {
+            if ($(window).scrollTop() > 0) {
+                $(".top_navbar").addClass("scrolled");
+                $(".sidebar").addClass("scrolled");
+                $("section.content").addClass("scrolled");
+            } else {
+                //remove the background property so it comes transparent again (defined in your css)
+                $(".top_navbar").removeClass("scrolled");
+                $(".sidebar").removeClass("scrolled");
+                $("section.content").removeClass("scrolled");
+            }
+        });
+    var globalSwalMessage = [];
+    var messageBox = "";
+
+    function GenerateSwalMessages() {
+        if (messageBox.length > 0) {
+            var messageBoxobj = jQuery.parseJSON(messageBox);
+            ShowMessageBox(messageBoxobj.Title,
+                messageBoxobj.Message,
+                "error",
+                "error",
+                messageBoxobj.MessageButtons,
+                GenerateSwalMessages);
+            messageBox = "";
+            return;
+        }
+        if (globalSwalMessage.length == 0) {
+            GenerateNotifies('');
+            return;
+        }
+        var value = globalSwalMessage.shift();
+        ShowSwalAlertMessage(value.Title,
+            value.Message,
+            value.Type,
+            value.Icon,
+            "مشاهده شد",
+            GenerateSwalMessages);
+    }
+
+    function GenerateMessages() {
+        var a = '';
+        messageBox = '';
+        if (messageBox.length > 0) {
+            messageBox = messageBox.replace(/&quot;/g, '"');
+            messageBox = messageBox.replace('\r\n', '\\r\\n');
+            messageBox = messageBox.replace(/\r\n/g, '\\r\\n');
+            messageBox = messageBox.replace('\r', '\\r');
+            messageBox = messageBox.replace('\n', '\\n');
+            messageBox = messageBox.replace(/\r/g, '\\r');
+            messageBox = messageBox.replace(/\n/g, '\\n');
+        }
+        if (a.length > 0) {
+            a = a.replace(/&quot;/g, '"');
+            a = a.replace('\r\n', '\\r\\n');
+            a = a.replace(/\r\n/g, '\\r\\n');
+            a = a.replace('\r', '\\r');
+            a = a.replace('\n', '\\n');
+            a = a.replace(/\r/g, '\\r');
+            a = a.replace(/\n/g, '\\n');
+
+            globalSwalMessage = jQuery.parseJSON(a);
+
+
+        } else {
+            GenerateNotifies('');
+            //return;
+        }
+        GenerateSwalMessages();
+    }
+    </script>
+
+
+
+
+
+<div class="sweet-container"><div class="sweet-overlay" tabindex="-1"></div><div class="sweet-alert" style="display: none" tabindex="-1"><div class="sweet-icon sweet-error"><span class="x-mark"><span class="line left"></span><span class="line right"></span></span></div><div class="sweet-icon sweet-question">?</div><div class="sweet-icon sweet-warning">!</div> <div class="sweet-icon sweet-info">i</div> <div class="sweet-icon sweet-success"> <span class="line tip"></span> <span class="line long"></span> <div class="placeholder"></div> <div class="fix"></div> </div> <img class="sweet-image"> <h2>Title</h2><div class="sweet-content">Text</div><hr class="sweet-spacer"><button class="sweet-confirm">OK</button><button class="sweet-cancel">Cancel</button></div></div><div style="visibility: hidden; position: absolute; width: 100%; top: -10000px; left: 0px; right: 0px; transition: visibility linear 0.3s, opacity 0.3s linear; opacity: 0;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.5;"></div><div style="margin: 0px auto; top: 0px; left: 0px; right: 0px; position: fixed; border: 1px solid rgb(204, 204, 204); z-index: 2000000000; background-color: rgb(255, 255, 255);"><iframe title="چالش recaptcha تا دو دقیقه دیگر منقضی می‌شود" name="c-k30f8sizp0vj" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/bframe?hl=fa&amp;v=Jv8jlA-BQE5JD6rA-h_iqNH2&amp;k=6Ld2t-cUAAAAAH0dDULFp6M4PxAA6X9qWkBhCBoe&amp;bft=0dAFcWeA4tCNVKcIVx_Daq7X2-ZfqvNAldUXDNzLillzut1-MCT86dVrn6ZfA-H5Z0W3yrN0xu8JWb66xe5YYIwyqQbcbiLiQOOQ" style="width: 100%; height: 100%;"></iframe></div></div></body></html>
